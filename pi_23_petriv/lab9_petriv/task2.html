@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <script src="https://js.cx/libs/animate.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap');
+
+        #field {
+            height: 500px;
+            position: relative;
+        }
+
+        #logo {
+            position: absolute;
+            cursor: pointer;
+        }
+
+        #photo {
+            transition: transform 2s ease-in-out;
+            width: 150px;
+            height: 150px;
+        }
+
+        #text {
+            position: absolute;
+            top: 150px;
+            left: 50%;
+            opacity: 0;
+            transform: translateX(-50%);
+            white-space: nowrap;
+            text-align: center;
+            font-family: 'Comfortaa', sans-serif;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="field">
+        <div id="logo">
+            <img src="logo.png" id="photo">
+            <div id="text">Інженерія <br> Програмного <br> Забезпечення</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+
+
+            function makeEaseOut(timing) {
+                return function (timeFraction) {
+                    return 1 - timing(1 - timeFraction);
+                }
+            }
+
+            function bounce(timeFraction) {
+                for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                    if (timeFraction >= (7 - 4 * a) / 11) {
+                        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+                    }
+                }
+            }
+
+            function quad(timeFraction) {
+                return Math.pow(timeFraction, 2);
+            }
+
+            let logo = document.getElementById('logo');
+            let text = document.getElementById('text');
+            let field = document.getElementById('field');
+            let photo = document.getElementById('photo');
+
+
+            document.getElementById('logo').onclick = function () {
+                text.style.opacity = '0';
+
+                function animate({ duration, timing, draw, complete }) {
+                    let start = performance.now();
+
+                    requestAnimationFrame(function animate(time) {
+                        let timeFraction = (time - start) / duration;
+                        if (timeFraction > 1) timeFraction = 1;
+
+                        let progress = timing(timeFraction);
+                        draw(progress);
+
+                        if (timeFraction < 1) {
+                            requestAnimationFrame(animate);
+                        } else {
+                            if (complete) complete();
+                        }
+                    });
+                }
+
+                animate({
+                    duration: 2000,
+                    timing: makeEaseOut(bounce),
+                    draw: function (progress) {
+                        let height = field.clientHeight - logo.clientHeight;
+                        logo.style.top = height * progress + 'px';
+
+                    }
+                });
+
+                animate({
+                    duration: 2000,
+                    timing: makeEaseOut(quad),
+                    draw: function (progress) {
+                        let width = 850;
+                        logo.style.left = width * progress + "px";
+                    }
+                });
+
+                animate({
+                    duration: 2000,
+                    timing: makeEaseOut(quad),
+                    draw: function (progress) {
+
+                    },
+                    complete: function () {
+                        animateText(text);
+                        photo.style.transition = 'transform 2s ease-in-out';
+                        photo.style.transform = 'rotate(360deg)';
+                        setTimeout(function () {
+                            photo.style.transform = 'rotate(0deg)';
+                        }, 3000);
+                    }
+                });
+                function animateText(textArea) {
+                    let text = textArea.innerText;
+                    let to = text.length,
+                        from = 0;
+
+                    animate({
+                        duration: 3000,
+                        timing: bounce,
+                        draw: function (progress) {
+                            let result = (to - from) * progress + from;
+                            textArea.style.color = 'black';
+                            textArea.style.opacity = '1';
+                            textArea.innerText = text.slice(0, Math.ceil(result));
+                            setTimeout(function () {
+                                textArea.style.color = 'red';
+                                setTimeout(function () {
+                                    textArea.style.color = 'green';
+                                    setTimeout(function () {
+                                        textArea.style.color = 'yellow';
+                                    }, 4000);
+                                }, 3000);
+                            }, 2000);
+                            logo.style.left = (1 - progress) * 550 + 'px';
+                            logo.style.top = (1 - progress) * 350 + 'px';
+                        }
+                    });
+                }
+
+            }
+
+        });
+    </script>
+</body>
+
+</html>

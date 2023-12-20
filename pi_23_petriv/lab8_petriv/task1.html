@@ -1,0 +1,74 @@
+<html>
+    <head>
+        <script>
+            class Time {
+                constructor(hours, minutes, seconds) {
+                    this.hours = hours;
+                    this.minutes = minutes;
+                    this.seconds = seconds;
+                }
+            }
+            let time = new Time(14, 20, 10);
+
+            function displayTime(){
+                document.getElementById('time').innerHTML = `${time.hours}:${time.minutes}:${time.seconds}`;
+            }
+
+            function changeHours(){
+                let newHour = parseInt(document.getElementById('hours').value);
+                if(newHour > 0){
+                    time.hours += newHour;
+                    time.hours %= 24;
+                }
+            }
+
+            function changeMinutes(){
+                let newMinutes = parseInt(document.getElementById('minutes').value);
+                if(newMinutes > 0){
+                    let addedHours = Math.floor((time.minutes + newMinutes) / 60);
+                    let updatedMinutes = (time.minutes + newMinutes) % 60;
+
+                    time.minutes = updatedMinutes;
+                    time.hours += addedHours;
+                    time.hours %= 24;
+                }
+            }
+
+            function changeSeconds(){
+                let newSeconds = parseInt(document.getElementById('seconds').value);
+                if(newSeconds > 0){
+                    let addedMinutes = Math.floor((time.seconds + newSeconds) / 60);
+                    let updatedSeconds = (time.seconds + newSeconds) % 60;
+
+                    time.seconds = updatedSeconds;
+                    time.minutes += addedMinutes;
+
+                    if (time.minutes >= 60) {
+                        let addedHours = Math.floor(time.minutes / 60);
+                        time.minutes %= 60;
+                        time.hours += addedHours;
+                    }
+
+                    time.hours %= 24;
+                }
+            }
+
+            function changeTime(){
+                changeHours();
+                changeMinutes();
+                changeSeconds();
+                displayTime();
+            }
+
+        </script>
+    </head>
+    <body onload="displayTime()">
+        <form>
+            <p id="time"></p>
+            seconds <input type="text" id="seconds"><br>
+            minutes <input type="text" id="minutes"><br>
+            hours <input type="text" id="hours"><br>
+            <button type="button" onclick="changeTime()">Змінити час</button>
+        </form>
+    </body>
+</html>

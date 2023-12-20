@@ -1,0 +1,84 @@
+<html>
+    <head>
+        <style>
+            .keyboard-button {
+                width: 40px;
+                height: 40px;
+                margin: 5px;
+                font-size: 16px;
+            }
+
+            .space-button {
+                width: 290px;
+                height: 40px;
+                margin-left: 105px;
+            }
+
+            #display {
+                width: 550px;
+                height: 150px;
+                font-size: 20px;
+            }
+
+            .clear {
+                width: 200px;
+                height: 40px;
+                font-size: 20px;
+                margin-left: 150px;
+            }
+            .alt{
+                width: 100px;
+                height: 40px;
+                font-size: 15px;
+            }
+        </style>
+        <script>
+            let language = "ua";
+            const letters_ua = ["а", "б", "в", "г", "ґ", "д", "е", "є", "ж", "з", "и", "і", "ї", "й", "к", "л",
+                "м", "н", "о", "п", "р", "с", "т", "у", "ф", "х", "ц", "ч", "ш", "щ", "ь", "ю", "я", " "];
+            const letters_en = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n",
+                        "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", " "];
+
+            function createKeyboard(letters = letters_ua) {
+                let keys = ""
+                letters.map((key, index) => {
+                    if (key !== " ") {
+                        if (index % 11 === 0) {
+                            keys += "<br>";
+                        }
+                        keys += `<button class="keyboard-button" onclick="addSymbol('${key}')">${key}</button>`;
+                    } else {
+                        keys += `<br><button class="space-button" onclick="addSymbol(' ')">${key}</button>`;
+                    }
+                });
+                screenKeyboard.innerHTML = keys;
+            }
+            function clean() {
+                document.getElementById('display').value = "";
+            }
+            function addSymbol(key) {
+                document.getElementById('display').value += key;
+            }
+
+            function change(){
+                if(language == 'ua'){
+                    language = 'en';
+                    createKeyboard(letters_en);
+                }
+                else{
+                    language = 'ua';
+                    createKeyboard(letters_ua);
+                }
+            }
+
+        </script>
+    </head>
+
+    <body onload="createKeyboard()">
+        <textarea id="display"></textarea>
+        <div id="screenKeyboard"></div><br>
+        <button onclick="clean()" class="clear">Очистити поле</button><br><br>
+        <button onclick="change()" class="clear">Alt + Shift</button><br><br>
+        <a href="lab3.html">Повернутись назад</a>
+    </body>
+</html>

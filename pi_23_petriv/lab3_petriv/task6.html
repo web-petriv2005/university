@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        var toggleSubMenuValue = false;
+        var vegValue = false;
+        var lemonValue = false;
+        function init() {
+            var str = "";
+            str += "<a href='javascript:toggleSubMenu()'>фрукти</a>";
+            str += "<div id='subMain'></div>";
+            str += "<a href='javascript:veg()'>овочі</a>";
+            str += "<div id='subMain2'></div>";
+            document.getElementById("container").innerHTML = str;
+        }
+        function toggleSubMenu() {
+            var str = ""
+            if (!toggleSubMenuValue) {
+                str += "apple<br>";
+                str += "pineapple<br>";
+                str += "apricot<br>";
+                str += "pear<br>";
+                str += "<a href='javascript:lem()'>lemon</a><br><div id='subMain3'></div>";
+            }
+            toggleSubMenuValue = !toggleSubMenuValue;
+            document.getElementById("subMain").innerHTML = str;
+        }
+        function veg() {
+            var str = "";
+            if (!vegValue) {
+                str += "potatoes<br>";
+                str += "beetroot<br>";
+                str += "carrots<br>";
+                str += "pear<br>";
+            }
+            vegValue = !vegValue;
+            document.getElementById("subMain2").innerHTML = str;
+        }
+
+        function lem(){
+            var str = "";
+            if(!lemonValue){
+                str += "a<br>";
+                str += "b<br>";
+                str += "c<br>";
+                str += "d<br>";
+            }
+            lemonValue = !lemonValue;
+            document.getElementById("subMain3").innerHTML = str;
+        }
+
+    </script>
+</head>
+
+<body onload="init()">
+    <div id="container"></div>
+    <a href="lab3.html">Повернутись назад</a>
+</body>
+
+</html>

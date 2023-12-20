@@ -1,0 +1,22 @@
+<html>
+    <head>
+        <script>
+            function fun1(){
+                let a = document.main_form.t_a.value;
+                let b = document.main_form.t_b.value;
+                console.log("1)Остача: " + a%b);
+                console.log("2) ", a%b == 0);
+                var foo = [25, "string", "text", 19];
+                console.log("theory is %d %s concept. I can only describe it as %s and %d", foo[0], foo[1], foo[2], foo[3]);
+            }
+        </script>
+    </head>
+    <body>
+        <form name="main_form">
+            a <input type="text" name="t_a" value="10"> <br>
+            b <input type="text" name="t_b" value="3"><br>
+            <input type="button" value="Вивести в консоль" onclick="fun1();">
+        </form>
+        <a href="lab2.html">Повернутись назад</a>
+    </body>
+</html>

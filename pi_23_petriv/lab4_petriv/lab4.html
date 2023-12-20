@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function Result(form) {
+            let totalScore = 0;
+            let score = 0;
+            let resultsTable = document.getElementById('resultsTable');
+            resultsTable.innerHTML = '';
+            let bal1 = form.elements['q1'];
+            let answer1 = "";
+            for (var i = 0; i < bal1.length; i++) {
+                if (bal1[i].type === 'radio' && bal1[i].checked) {
+                    score = parseFloat(bal1[i].value);
+                    totalScore += score;
+                    answer1 = bal1[i].nextElementSibling.textContent;
+                }
+            }
+            let question1 = document.querySelector('.question1 p').textContent;
+            addResultRow(resultsTable, question1, answer1, score);
+
+
+            let bal2 = form.elements['q2'];
+            let answer2 = "";
+            for (var i = 0; i < bal2.length; i++) {
+                if (bal2[i].type === 'radio' && bal2[i].checked) {
+                    score = parseFloat(bal2[i].value);
+                    totalScore += score;
+                    answer2 = bal2[i].nextElementSibling.textContent;
+                }
+            }
+            let question2 = document.querySelector('.question2 p').textContent;
+            addResultRow(resultsTable, question2, answer2, score);
+
+
+            score = 0;
+            let bal3 = form.elements['q3'];
+            let answer3 = "";
+
+            let selectedCount = 0;
+
+            for (var i = 0; i < bal3.length; i++) {
+                if (bal3[i].type == 'checkbox' && bal3[i].checked) {
+                    score += parseFloat(bal3[i].value);
+                    answer3 += bal3[i].nextElementSibling.textContent + ', ';
+                    selectedCount++;
+                }
+            }
+            if (selectedCount >= 3) {
+                score = 0;
+            }
+            totalScore += score;
+            if (answer3 !== "") {
+                answer3 = answer3.slice(0, -2);
+            }
+            let question3 = document.querySelector('.question3 p').textContent;
+            addResultRow(resultsTable, question3, answer3, score);
+
+
+            selectedCount = 0, score = 0;
+            let answer4 = "";
+            let bal4 = form.elements['q4'];
+            for (var i = 0; i < bal4.length; i++) {
+                if (bal4[i].type == 'checkbox' && bal4[i].checked) {
+                    score += parseFloat(bal4[i].value);
+                    answer4 += bal4[i].nextElementSibling.textContent + ', ';
+                    selectedCount++;
+                }
+            }
+            if (selectedCount >= 3) {
+                score = 0;
+            }
+            if (answer4 !== "") {
+                answer4 = answer4.slice(0, -2);
+            }
+            totalScore += score;
+            let question4 = document.querySelector('.question4 p').textContent;
+            addResultRow(resultsTable, question4, answer4, score);
+
+
+            selectedCount = 0, score = 0;
+            let answer5 = "";
+            let bal5 = form.elements['q5'];
+            for (var i = 0; i < bal5.length; i++) {
+                if (bal5[i].selected) {
+                    score += parseFloat(bal5[i].value);
+                    answer5 += bal5[i].textContent + ', ';
+                    selectedCount++;
+                }
+            }
+            if (selectedCount >= 3) {
+                score = 0;
+            }
+            if (answer5 !== "") {
+                answer5 = answer5.slice(0, -2);
+            }
+            totalScore += score;
+            let question5 = document.querySelector('.question5 p').textContent;
+            addResultRow(resultsTable, question5, answer5, score);
+
+
+            selectedCount = 0, score = 0;
+            let answer6 = "";
+            let bal6 = form.elements['q6'];
+            for (var i = 0; i < bal6.length; i++) {
+                if (bal6[i].selected) {
+                    score += parseFloat(bal6[i].value);
+                    answer6 += bal6[i].textContent + ', ';
+                    selectedCount++;
+                }
+            }
+            if (selectedCount >= 3) {
+                score = 0;
+            }
+            if (answer6 !== "") {
+                answer6 = answer6.slice(0, -2);
+            }
+            totalScore += score;
+            let question6 = document.querySelector('.question6 p').textContent;
+            addResultRow(resultsTable, question6, answer6, score);
+
+
+            score = 0;
+            let bal7 = form.elements['q7'].value;
+            let correctAnswer7 = "Париж";
+            if (bal7.toLowerCase() === correctAnswer7.toLowerCase()) {
+                score = 1;
+            }
+            totalScore += score;
+            let question7 = document.querySelector('.question7 p').textContent;
+            addResultRow(resultsTable, question7, bal7, score);
+
+            score = 0;
+            let bal8 = form.elements['q8'];
+            for(var i = 0; i<bal8.length;i++){
+                if(bal8[i].selected){
+                    score = parseFloat(bal8[i].value);
+                    totalScore += score;
+                    answer8 = bal8[i].textContent;
+                }
+            }
+            let question8 = document.querySelector('.question8 p').textContent;
+            addResultRow(resultsTable, question8, answer8, score);
+
+            document.getElementById('totalScore').innerHTML = "Загальний бал: " + totalScore + " з 12";
+        }
+
+        function addResultRow(table, question, answer, score) {
+            let row = table.insertRow();
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            let cell3 = row.insertCell(2);
+            cell1.innerHTML = question;
+            cell2.innerHTML = answer;
+            cell3.innerHTML = score;
+        }
+    </script>
+</head>
+
+<body>
+    <form id="quiz" onsubmit="return false;">
+        <div class="question1">
+            <p>Яка столиця Сполучених Штатів?</p>
+            <div class="options">
+                <input type="radio" name="q1" value="1"> <label>Вашингтон</label>
+                <input type="radio" name="q1" value="0"> <label>Париж</label>
+                <input type="radio" name="q1" value="0"> <label>Анкара</label>
+                <input type="radio" name="q1" value="0"> <label>Антананаріву</label>
+            </div>
+        </div>
+        <div class="question2">
+            <p>Яка найвища гора в світі?</p>
+            <div class="options">
+                <input type="radio" name="q2" value="0"> <label>Говерла</label>
+                <input type="radio" name="q2" value="1"> <label>Еверест</label>
+                <input type="radio" name="q2" value="0"> <label>Канченджанга</label>
+                <input type="radio" name="q2" value="0"> <label>Конгуртюбе</label>
+            </div>
+        </div>
+        <div class="question3">
+            <p>Головні герої антиутопії "1984" Джордж Орвелл:</p>
+            <div class="options">
+                <input type="checkbox" name="q3" value="1"> <label>Вінстон Сміт</label>
+                <input type="checkbox" name="q3" value="0"> <label>Ромео</label>
+                <input type="checkbox" name="q3" value="1"> <label>Старший Брат</label>
+                <input type="checkbox" name="q3" value="0"> <label>Джульєтта</label>
+            </div>
+        </div>
+        <div class="question4">
+            <p>Швидкі алгоритми сортування</p>
+            <div class="options">
+                <input type="checkbox" name="q4" value="0"> <label>Bubble sort</label>
+                <input type="checkbox" name="q4" value="1"> <label>Quick sort</label>
+                <input type="checkbox" name="q4" value="1"> <label>Merge sort</label>
+                <input type="checkbox" name="q4" value="0"> <label>Selection Sort</label>
+            </div>
+        </div>
+        <div class="question5">
+            <p>Президенти України</p>
+            <select name="q5" id="q5" multiple>
+                <option value="1">Леонід Кучма</option>
+                <option value="0">Річард Ніксон</option>
+                <option value="1">Віктор Ющенко</option>
+                <option value="0">Білл Клінтон</option>
+            </select>
+        </div>
+        <div class="question6">
+            <p>Які змінні є в JavaScript?</p>
+            <select name="q6" id="q6" multiple>
+                <option value="0">int</option>
+                <option value="1">var</option>
+                <option value="0">float</option>
+                <option value="1">let</option>
+            </select>
+        </div>
+        <div class="question7">
+            <p>Яка столиця Франції?</p>
+            <input type="text" name="q7" value="">
+        </div><br>
+        <div class="question8">
+            <p>Яка скорочена назва спеціальності "Інженерія програмного забезпечення?"</p>
+            <select name="q8" id="q8">
+                <option value="1">ІПЗ</option>
+                <option value="0">КН</option>
+                <option value="0">ІСТ</option>
+                <option value="0">ПМ</option>
+            </select>
+        </div>
+        <button id="resultButton" onclick="Result(this.form)">Завершити тестування</button>
+    </form>
+    <table id="resultsTable">
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </table>
+    <br>
+    <span id="totalScore"></span>
+</body>
+
+</html>

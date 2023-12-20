@@ -1,0 +1,433 @@
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <style>
+        /* Стилі для прикладу 1 тут */
+        #train {
+            position: relative;
+            cursor: pointer;
+        }
+
+        /* Стилі для прикладу 3 тут */
+        progress {
+            width: 5%;
+        }
+
+        /* Стилі для прикладу 4 тут */
+        #brick,
+        #brick2,
+        #brick3,
+        #brick4,
+        #brick5,
+        #brick6,
+        #brick7,
+        #brick8 {
+            width: 40px;
+            height: 20px;
+            background: #EE6B47;
+            position: relative;
+            cursor: pointer;
+
+        }
+
+        #path,
+        #path2,
+        #path3,
+        #path4,
+        #path5,
+        #path6,
+        #path7,
+        #path8 {
+            outline: 1px solid #E8C48E;
+            width: 540px;
+            height: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Приклад 1 -->
+    <img id="train" src="https://js.cx/clipart/train.gif"><br>
+
+    <!-- Приклад 2 (виведено перед кнопкою) -->
+    <div id="animationOutput"></div>
+    <button onclick="executeAnimation()">Виконати</button><br>
+    <br>
+    <!-- Приклад 3 -->
+    <progress id="elem"></progress>
+
+    <br><br>
+    <!-- Приклад 4 -->
+    <div id="path">
+        <div id="brick"></div>
+    </div>
+
+    <br>
+    <div id="path2">
+        <div id="brick2"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 5 -->
+    <div id="path3">
+        <div id="brick3"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 6 -->
+    <div id="path4">
+        <div id="brick4"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 7 -->
+    <div id="path5">
+        <div id="brick5"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 8 -->
+    <div id="path6">
+        <div id="brick6"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 9 -->
+    <div id="path7">
+        <div id="brick7"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 10 -->
+    <div id="path8">
+        <div id="brick8"></div>
+    </div>
+
+    <br>
+    <!-- Приклад 11 -->
+    <textarea id="textExample" rows="5" cols="60">He took his vorpal sword in hand:
+Long time the manxome foe he sought—
+So rested he by the Tumtum tree,
+And stood awhile in thought.
+    </textarea><br>
+
+    <button onclick="animateText(textExample)">Run the animated typing!</button>
+
+    <script>
+        function moveTrain() {
+            let train = document.getElementById('train');
+            train.onclick = function () {
+                let start = Date.now();
+
+                let timer = setInterval(function () {
+                    let timePassed = Date.now() - start;
+
+                    train.style.left = timePassed / 5 + 'px';
+
+                    if (timePassed > 2000) clearInterval(timer);
+
+                }, 20);
+            };
+        }
+
+        function executeAnimation() {
+            let prevTime = performance.now();
+            let times = 0;
+            let output = document.getElementById('animationOutput');
+
+            function measure(time) {
+                output.insertAdjacentHTML("beforeEnd", Math.floor(time - prevTime) + " ");
+                prevTime = time;
+
+                if (times++ < 10) requestAnimationFrame(measure);
+            }
+            requestAnimationFrame(measure);
+        }
+
+        function animateProgress() {
+            let elem = document.getElementById('elem');
+            elem.onclick = function () {
+                let start = performance.now();
+                requestAnimationFrame(function animate(time) {
+                    let timeFraction = (time - start) / 1000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    elem.style.width = timeFraction * 100 + '%';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                });
+            };
+        }
+
+        function moveBrick() {
+            let brick = document.getElementById('brick');
+            brick.onclick = function () {
+                let start = performance.now();
+                requestAnimationFrame(function animate(time) {
+                    let timeFraction = (time - start) / 1000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    let progress = Math.pow(timeFraction, 2);
+                    brick.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                });
+            };
+        }
+
+        function animateBrick2() {
+            let brick2 = document.getElementById('brick2');
+
+            brick2.onclick = function () {
+                let start = performance.now();
+
+                function animate(time) {
+                    let timeFraction = (time - start) / 1000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    let progress = Math.pow(timeFraction, 5);
+                    brick2.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick3() {
+            let brick3 = document.getElementById('brick3');
+
+            brick3.onclick = function () {
+                let start = performance.now();
+
+                function animate(time) {
+                    let timeFraction = (time - start) / 1000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    let progress = 1 - Math.sin(Math.acos(timeFraction));
+                    brick3.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick4() {
+            let brick4 = document.getElementById('brick4');
+
+            brick4.onclick = function () {
+                let start = performance.now();
+
+                function animate(time) {
+                    let timeFraction = (time - start) / 1000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+                    x = 1.5;
+
+                    let progress = Math.pow(timeFraction, 2) * ((x + 1) * timeFraction - x);
+                    brick4.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick5() {
+            let brick5 = document.getElementById('brick5');
+
+            brick5.onclick = function () {
+                let start = performance.now();
+
+                function animate(time) {
+                    let timeFraction = (time - start) / 3000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    for (let a = 0, b = 1; ; a += b, b /= 2) {
+                        if (timeFraction >= (7 - 4 * a) / 11) {
+                            let progress = -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+                            brick5.style.left = progress * 500 + 'px';
+                            break;
+                        }
+                    }
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick6() {
+            let brick6 = document.getElementById('brick6');
+
+            brick6.onclick = function () {
+                let start = performance.now();
+
+                function animate(time) {
+                    let timeFraction = (time - start) / 3000; // 1000 ms duration
+                    if (timeFraction > 1) timeFraction = 1;
+                    x = 1.5;
+
+                    let progress = Math.pow(2, 10 * (timeFraction - 1)) * Math.cos(20 * Math.PI * x / 3 * timeFraction);
+                    brick6.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick7() {
+            let brick7 = document.getElementById('brick7');
+
+            brick7.onclick = function () {
+                let start = performance.now();
+                let duration = 3000;
+
+                function makeEaseOut(timing) {
+                    return function (timeFraction) {
+                        return 1 - timing(1 - timeFraction);
+                    };
+                }
+
+                function bounce(timeFraction) {
+                    for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                        if (timeFraction >= (7 - 4 * a) / 11) {
+                            return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+                        }
+                    }
+                }
+
+                let bounceEaseOut = makeEaseOut(bounce);
+
+                function animate(time) {
+                    let timeFraction = (time - start) / duration;
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    let progress = bounceEaseOut(timeFraction);
+                    brick7.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+        function animateBrick8() {
+            let brick8 = document.getElementById('brick8');
+
+            function makeEaseInOut(timing) {
+                return function (timeFraction) {
+                    if (timeFraction < 0.5)
+                        return timing(2 * timeFraction) / 2;
+                    else
+                        return (2 - timing(2 * (1 - timeFraction))) / 2;
+                };
+            }
+
+            function bounce(timeFraction) {
+                for (let a = 0, b = 1; ; a += b, b /= 2) {
+                    if (timeFraction >= (7 - 4 * a) / 11) {
+                        return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+                    }
+                }
+            }
+
+            let bounceEaseInOut = makeEaseInOut(bounce);
+
+            brick8.onclick = function () {
+                let start = performance.now();
+                let duration = 3000;
+
+                function animate(time) {
+                    let timeFraction = (time - start) / duration;
+                    if (timeFraction > 1) timeFraction = 1;
+
+                    let progress = bounceEaseInOut(timeFraction);
+                    brick8.style.left = progress * 500 + 'px';
+
+                    if (timeFraction < 1) {
+                        requestAnimationFrame(animate);
+                    }
+                }
+
+                requestAnimationFrame(animate);
+            };
+        }
+
+
+    function animateText(textArea) {
+        let text = textArea.value;
+        let to = text.length,
+            from = 0;
+        let duration = 5000; // Тривалість анімації у мілісекундах
+        let startTime = performance.now();
+
+        function animate() {
+            let currentTime = performance.now();
+            let timeFraction = (currentTime - startTime) / duration;
+            if (timeFraction > 1) timeFraction = 1;
+
+            let progress = bounce(timeFraction);
+            let result = (to - from) * progress + from;
+            textArea.value = text.slice(0, Math.ceil(result));
+
+            if (timeFraction < 1) {
+                requestAnimationFrame(animate);
+            }
+        }
+
+        requestAnimationFrame(animate);
+    }
+
+    function bounce(timeFraction) {
+        for (let a = 0, b = 1; ; a += b, b /= 2) {
+            if (timeFraction >= (7 - 4 * a) / 11) {
+                return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+            }
+        }
+    }
+
+
+        animateBrick8();
+
+
+
+        moveTrain();
+        animateProgress();
+        moveBrick();
+        animateBrick2();
+        animateBrick3();
+        animateBrick4();
+        animateBrick5();
+        animateBrick6();
+        animateBrick7();
+    </script>
+
+</body>
+
+</html>

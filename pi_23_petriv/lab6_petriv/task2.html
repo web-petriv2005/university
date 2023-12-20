@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #F0F0F0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .register {
+            width: 600px;
+            margin: 10px auto;
+            padding: 10px;
+            border: 7px solid #72B372;
+            border-radius: 10px;
+            background-color: #F0F0F0;
+            box-shadow: 0 0 20px 0 #000000;
+        }
+
+        .button {
+            font-size: 1em;
+            border-radius: 8px;
+            padding: 10px;
+            border: 1px solid #59B969;
+            box-shadow: 0 1px 0 0 #60BD49 inset;
+            background: linear-gradient(#63E651, #42753E);
+        }
+
+        form {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="register">
+            <h3>Перевірка валідності інформації</h3>
+            <form id="reg-form">
+                <div>
+                    <label for="email">Email</label>
+                    <input type="text" id="email">
+                    <span id="email-error"></span>
+                </div>
+                <div>
+                    <label for="name">Ім'я</label>
+                    <input type="text" id="name" />
+                    <span id="name-error"></span>
+                </div>
+
+                <div>
+                    <label for="username">Логін</label>
+                    <input type="text" id="username" />
+                    <span id="username-error"></span>
+                </div>
+                <div>
+                    <label for="password">Пароль</label>
+                    <input type="password" id="password" />
+                    <span id="password-error"></span>
+                </div>
+                <div>
+                    <label for="code">Поштовий індекс</label>
+                    <input type="text" id="code" />
+                    <span id="code-error"></span>
+                </div>
+                <div>
+                    <input type="submit" value="Перевірити" id="create-account" class="button" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('reg-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+            validForm();
+        });
+
+        function validForm() {
+            const nameRegex = /^([А-ЯІЇЄҐ][а-яіїєґ]+)\s+([А-ЯІЇЄҐ]+)$|^([A-Z][a-z]+)\s+([A-Z]+)$/;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+[@pnu\.edu\.ua]$/;
+            const usernameRegex = /^[a-zA-Z]+$/;
+            const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[-!@#$%^&*]).{8,}$/;
+            const codeRegex = /^\d{5}$/;
+
+
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const code = document.getElementById('code').value;
+
+
+            const isValidName = nameRegex.test(name);
+            const isValidEmail = emailRegex.test(email);
+            const isValidUsername = usernameRegex.test(username);
+            const isValidPassword = passwordRegex.test(password);
+            const isValidCode = codeRegex.test(code);
+
+            result('name', isValidName);
+            result('email', isValidEmail);
+            result('username', isValidUsername);
+            result('password', isValidPassword);
+            result('code', isValidCode);
+        }
+
+        function result(field, isValid) {
+            const errorElement = document.getElementById(`${field}-error`);
+            const inputElement = document.getElementById(field);
+
+            if (isValid) {
+                errorElement.innerHTML = '<img src="check.png">';
+                inputElement.style.border = '';
+                inputElement.style.color = 'black';
+            } else {
+                errorElement.textContent = `Поле заповнене не вірно`;
+                inputElement.style.border = '5px double red';
+                inputElement.style.color = 'red';
+            }
+        }
+    </script>
+</body>
+
+</html>

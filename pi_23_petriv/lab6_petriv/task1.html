@@ -1,0 +1,15 @@
+<html>
+<head>
+    <script>
+        let s = "viktoriiapetriv.22@pnu.edu.ua";
+        let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)(\.[a-z0-9]+)*$/i;
+        let a = s.match(r);
+        for (i = 0; i < a.length; i++) {
+            document.writeln("<hr> a[" + i + "] " + a[i]);
+        }
+    </script>
+</head>
+<body>
+
+</body>
+</html>

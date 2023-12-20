@@ -1,0 +1,111 @@
+<html>
+<head>
+    <script>
+        function sub() {
+            first();
+            second();
+            third();
+            four();
+            five();
+            sixth();
+        }
+
+        function first() {
+            let fir = document.getElementById('string1').value;
+            let sec = document.getElementById('string2').value;
+
+            if (fir.length > sec.length) {
+                document.getElementById('outFirst').innerHTML = 1;
+            } else if (sec.length > fir.length) {
+                document.getElementById('outFirst').innerHTML = -1;
+            } else {
+                document.getElementById('outFirst').innerHTML = 0;
+            }
+        }
+
+        function second() {
+            let string = document.getElementById('str1').value;
+            let symbol = document.getElementById('str2').value;
+            let result = [];
+            let count = 0;
+
+            for (i = 0; i < string.length; i++) {
+                if (string[i] == symbol) {
+                    result.push(i);
+                    count++;
+                }
+            }
+            document.getElementById('outSecond').innerHTML = "Index: " + result + " Count: " + count;
+        }
+
+        function third(){
+            let string = document.getElementById('str3').value;
+            document.getElementById('outThird').innerHTML = string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function four(){
+            let stringA = document.getElementById('str4').value;
+            if(stringA.trim() !== ''){
+                let count = stringA.match(/[aeiouаеєиіїоуюя]/gi).length;
+                document.getElementById('outFourth').innerHTML = count;
+            }
+        }
+
+        function five() {
+           let string = document.getElementById('str5').value;
+            string.toLowerCase();
+
+            let spamWords = ["100% безкоштовно", "збільшення продажів", "тільки сьогодні", "не видаляйте"];
+
+            let isSpam = false;
+
+            for (let i = 0; i < spamWords.length; i++) {
+                if (string.includes(spamWords[i])) {
+                    isSpam = true;
+                }
+            }
+            document.getElementById('Five').innerHTML = isSpam;
+        }
+
+        function sixth(){
+            let string = document.getElementById('str6').value;
+            let number = document.getElementById('num').value;
+
+            if(string.length <= number){
+                document.getElementById('Six').innerHTML = string;
+            } else {
+                document.getElementById('Six').innerHTML = string.slice(0, number - 3) + "...";
+            }
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <form id="main">
+        2.1
+        <input type="text" id="string1">
+        <input type="text" id="string2">
+        <p id="outFirst"></p>
+        2.2
+        <input type="text" id="str1">
+        <input type="text" id="str2">
+        <p id="outSecond"></p>
+        2.3
+        <input type="text" id="str3">
+        <p id="outThird"></p>
+        2.4 
+        <input type="text" id="str4">
+        <p id="outFourth"></p>
+        2.5
+        <input type="text" id="str5">
+        <p id="Five"></p>
+        2.6
+        <input type="text" id="str6">
+        <input type="text" id="num">
+        <p id="Six"></p>
+        <button type="button" onclick="sub()">Виконати</button>
+    </form>
+</body>
+</html>

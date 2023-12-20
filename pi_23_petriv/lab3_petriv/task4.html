@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        let image = ['file1.jpg', 'file2.jpg', 'file3.jpg'];
+        let currentIndex = 0;
+
+        function createImageElement() {
+                const displayedImage = document.createElement('img');
+                displayedImage.id = 'displayed-image';
+                displayedImage.src = '';
+                displayedImage.alt = 'Зображення';
+                displayedImage.style.width = '500px';
+                return displayedImage;
+            }
+        function showImage(index) {
+            if (index < 0) {
+                index = image.length - 1;
+            } else if (index >= image.length) {
+                index = 0;
+            }
+
+            currentIndex = index;
+            const displayedImage = document.getElementById('displayed-image');
+            displayedImage.src = image[index];
+        }
+
+        function showPreviousImage() {
+            showImage(currentIndex - 1);
+        }
+
+        function showNextImage() {
+            showImage(currentIndex + 1);
+        }
+        function fun() {
+            const imageContainer = document.getElementById('image-container');
+            const displayedImage = createImageElement();
+            imageContainer.appendChild(displayedImage);
+
+            showImage(0);
+        }
+    </script>
+</head>
+
+<body onload="fun()">
+    <div id="image-container"></div>
+    <button id="prev" onclick="showPreviousImage()" style="width: 200px; height: 40px; font-size: 20px;  margin-left: 30px;">Назад</button>
+    <button id="next" onclick="showNextImage()" style="width: 200px; height: 40px; font-size: 20px; margin-left: 25px;">Вперед</button><br><br>
+
+    <a href="lab3.html">Повернутись назад</a>
+</body>
+
+</html>

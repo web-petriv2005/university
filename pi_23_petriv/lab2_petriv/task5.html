@@ -1,0 +1,41 @@
+<html>
+
+<head>
+    <script>
+        function fun1() {
+            let a = document.main_form.t_a.value;
+            let b = 10, c = 3;
+            let foo = {"name":"John Miller", "id":2522, "theme":"dark"};
+            console.info(a);
+            console.warn(a);
+            console.error(a);
+            console.dir(foo);
+            console.dirxml(document.body);
+            console.time("This");
+            let total = 0;
+            for(let j = 0; j < 10000; j++){
+                total += j
+            }
+            console.timeEnd("This");
+
+            console.assert(b % c == 0, "Not equal");
+
+            console.profile("Task");
+            for (let i = 0; i < 4; i++) {
+                console.log('Doing task no:', i);
+            }
+            console.profileEnd("Task");
+            
+        }
+    </script>
+</head>
+
+<body>
+    <form name="main_form">
+        text <input type="text" name="t_a" value="Hello world"> <br>
+        <input type="button" value="Вивести в консоль" onclick="fun1();">
+    </form>
+    <a href="lab2.html">Повернутись назад</a>
+</body>
+
+</html>

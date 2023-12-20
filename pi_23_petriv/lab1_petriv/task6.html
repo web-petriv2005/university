@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <script lang="JavaScript">
+            let continent = new Array(6);
+            continent[0] = "Євразія";
+            continent[1] = "Антарктида";
+            continent[2] = "Північна Америка";
+            continent[3] = "Південна Америка";
+            continent[4] = "Австралія";
+            continent[5] = "Африка";
+
+            let destiny = new  Array(6);
+            destiny[0] = "99.8";
+            destiny[1] = "0.0003";
+            destiny[2] = "22.9";
+            destiny[3] = "21.4";
+            destiny[4] = "4.2";
+            destiny[5] = "42.12";
+
+            let area = new Array(6);
+            area[0] = "54759000";
+            area[1] = "14200000";
+            area[2] = "24930000";
+            area[3] = "17843000";
+            area[4] = "7688094";
+            area[5] = "30271000";
+
+            let selectedCont;
+            let population;
+            let index;
+            function fun1(){
+                selectedCont = document.getElementById("continent").value;
+                index = continent.indexOf(selectedCont);
+                if(index != -1){
+                    entryForm.output1.value = "Густина: " + destiny[index] + " Площа: " + area[index];
+                }
+            }
+
+            function fun2(){
+                if(selectedCont){
+                    population = parseFloat(destiny[index]) * parseFloat(area[index]);
+                    entryForm.output2.value = Math.round(population);
+                }
+            }
+
+            function fun3(){
+                alert(entryForm.newpr.value * entryForm.output2.value);
+            }
+
+        </script>
+    </head>
+    <body>
+        <form name="entryForm">
+            <label for="cont">Choose country:</label>
+            <select name="continents" id="continent">
+                <option value="Євразія">Євразія</option>
+                <option value="Антарктида">Антарктида</option>
+                <option value="Північна Америка">Північна Америка</option>
+                <option value="Південна Америка">Південна Америка</option>
+                <option value="Австралія">Австралія</option>
+                <option value="Африка">Африка</option>
+            </select><br><br>
+            <input type="button" value="Густина і площа" onclick="fun1()"><br><br>
+            <input type="text" size="70" name="output1"><br><br>
+            <input type="button" value="Населення" onclick="fun2()"><br><br>
+            <input type="text" size="70" name="output2"><br>
+            <input type="text" name="newpr"><br>
+            <button type="button" onclick="fun3()">Приріст</button>
+        </form>
+        <a href="lab1.html"><p>Повернутись назад</p></a>
+    </body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+
+<head>
+    <style>
+        .custom-style {
+            width: 400px;
+            height: 100px;
+            cursor: pointer;
+        }
+
+        .highlight {
+            border: 3px double red;
+            background-color: greenyellow;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        /// 1
+        $(document).ready(function () {
+            $('.custom-style').bind('click', function () {
+                $(this).addClass('highlight');
+            });
+
+            $('.custom-style').bind('dblclick', function () {
+                $(this).removeClass('highlight');
+            });
+        });
+
+
+        ///   2
+        $(document).ready(function () {
+            $('button:first').bind('click', function () {
+                alert("Одинарний клік");
+            });
+            $('button:last').bind('dblclick', function () {
+                alert("Подвійний клік");
+            })
+        });
+
+
+        ///   3 
+        $(document).ready(function () {
+            $('.showImage').bind('click', function () {
+                $('#theImage').fadeIn();
+            });
+
+            $('#theImage').bind('click', function () {
+                $('#theImage').fadeOut();
+            });
+
+            $('#theImage').mouseover(function () {
+                $(this).attr("title", this.alt);
+            });
+            $('#theImage').mouseout(function () {
+                $(this).removeAttr("title");
+            });
+        });
+
+
+        ///   4
+
+        $(document).ready(function(){
+            $("form").submit(function (event) {
+                event.preventDefault();
+                if ($("input:first").val() === "correct") {
+                    $("span:last").text("Успішно!").show();
+                } else {
+                    $("span:last").text("Неправильно!").show();
+                }
+            }); 
+        });
+        
+
+    </script>
+</head>
+
+<body>
+    <div class="custom-style">При одинарному кліку задайте появу рамки і заливки, при подвійному — повернення до
+        початкових значень</div>
+
+    <button>Одинарний клік</button>
+    <button>Подвійний клік</button>
+    <div id="imageContainer">
+        <p class="showImage">Показати зображення</p>
+        <img src="bird.png" id="theImage" style="display: none;" alt="flying bird">
+    </div>
+
+    <p> Введіть в текстове поле слово 'correct'.</p>
+    
+    
+    <form>
+        <div>
+            <input type="text" />
+            <input type="submit" />
+        </div>
+    </form>
+    <span></span>
+
+</body>
+
+</html>

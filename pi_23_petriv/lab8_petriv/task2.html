@@ -1,0 +1,124 @@
+<html>
+
+<head>
+    <script>
+        function task1() {
+            let days = ['понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота', 'неділя'];
+            let months = ['січеня', 'лютого', 'березеня', 'квітеня', 'травеня', 'червеня', 'липеня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'];
+            let now = new Date();
+            month = now.getMonth();
+            date = now.getDate();
+            year = now.getFullYear();
+            day = now.getDay();
+            hour = now.getHours();
+            minutes = now.getMinutes();
+            document.getElementById('first').innerHTML = `Дата: ${date} ${months[month]} ${year} року<br>День тижня: ${days[day - 1]}<br>Час: ${hour}:${minutes}`;
+        }
+
+        function task2() {
+            let now = new Date();
+            day = now.getDay();
+            let days = ['понеділок', 'вівторок', 'середа', 'четвер', 'п\'ятниця', 'субота', 'неділя'];
+            let info = {
+                dayNumber: day == 0 ? 7 : day,
+                dayName: days[day == 0 ? 6 : day - 1]
+            };
+            document.getElementById('second').innerHTML = `Номер тижня: ${info.dayNumber}<br>Назва дня тижня: ${info.dayName}.`;
+        }
+
+        function task3() {
+            let days = document.getElementById('findDate').value;
+            let now = new Date();
+            let futureDate = new Date(now.getTime() + days * 24 * 60 * 60 * 1000);
+            let day = futureDate.getDate();
+            let month = futureDate.getMonth() + 1;
+            let year = futureDate.getFullYear();
+            let dateString = `${day}.${month}.${year}`;
+            let direction = days >= 0 ? 'вперед' : 'назад';
+            let comparison = futureDate >= now ? 'майбутня дата' : 'минула дата';
+            document.getElementById('third').innerHTML = `Дата ${Math.abs(days)} днів ${direction}: ${dateString} (${comparison})`;
+        }
+
+        function task4() {
+            let date = document.getElementById('lastDay').value;
+            let splitDate = date.split('.');
+            month = parseInt(splitDate[0]);
+            year = parseInt(splitDate[1]);
+            let lastDay = new Date(year, month, 0).getDate();
+            document.getElementById('fourth').innerHTML = `Останній день місяця: ${lastDay}`;
+
+        }
+
+        function task5() {
+            let now = new Date();
+            let startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            let startOfNextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+            let secondsFromStartOfDay = Math.round((now - startOfDay) / 1000);
+            let secondsToStartOfNextDay = Math.round((startOfNextDay - now) / 1000);
+            let dates = {
+                secondsPassedToday: secondsFromStartOfDay,
+                secondsToNextDay: secondsToStartOfNextDay
+            };
+            document.getElementById('fifth').innerHTML = `${dates.secondsPassedToday}<br>${dates.secondsToNextDay}`;
+        }
+
+        function formatDate(date) {
+            let diff = new Date() - date;
+            let sec = Math.floor(diff / 1000);
+            if (sec < 60) {
+                return sec + ' сек. назад';
+            }
+            let min = Math.floor(diff / 60000);
+            if (min < 60) {
+                return min + ' хв. назад';
+            }
+            let d = date;
+            d = [
+                '0' + d.getDate(),
+                '0' + (d.getMonth() + 1),
+                '' + d.getFullYear(),
+                '0' + d.getHours(),
+                '0' + d.getMinutes()
+            ].map(component => component.slice(-2));
+            return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+        }
+
+        function task6() {
+            let userInput = document.getElementById('subDays').value;
+            let parts = userInput.split(' ');
+            let date = parts[0];
+            let time = parts[1];
+            let dateComponents = date.split('.');
+            let timeComponents = time.split(':');
+            let inputDate = new Date(parseInt(dateComponents[2]), parseInt(dateComponents[1]) - 1, parseInt(dateComponents[0]), parseInt(timeComponents[0]), parseInt(timeComponents[1]));
+            let formattedDate = formatDate(inputDate);
+            document.getElementById('sixth').innerText = formattedDate;
+        }
+    </script>
+</head>
+<body>
+    <form>
+        <p>“Завдання 2.1.Виведення поточної дати, дня тижня і часу”</p>
+        <p id="first"></p>
+        <button type="button" onclick="task1()">Виконати</button>
+        <p>“Завдання 2.2.Виведення дня і номера тижня”</p>
+        <p id="second"></p>
+        <button type="button" onclick="task2()">Виконати</button>
+        <p>“Завдання 2.3”</p>
+        <input type="text" id="findDate">
+        <p id="third"></p>
+        <button type="button" onclick="task3()">Виконати</button>
+        <p>“Завдання 2.4”</p>
+        <input type="text" id="lastDay">
+        <p id="fourth"></p>
+        <button type="button" onclick="task4()">Виконати</button>
+        <p>“Завдання 2.5”</p>
+        <p id="fifth"></p>
+        <button type="button" onclick="task5()">Виконати</button>
+        <p>“Завдання 2.6”</p>
+        <input type="text" id="subDays">
+        <p id="sixth"></p>
+        <button type="button" onclick="task6()">Виконати</button>
+    </form>
+</body>
+</html>

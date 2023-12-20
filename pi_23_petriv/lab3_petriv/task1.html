@@ -1,0 +1,34 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <script>
+            function fun(){
+                let length = parseFloat(main_form.length.value);
+                let width = parseFloat(main_form.width.value);
+
+                let perimeter = 2 * (length + width);
+
+                let square = length * width;
+
+                let lengthOfDiagonal = Math.sqrt(Math.pow(length, 2) + Math.pow(width, 2));
+
+
+                document.getElementById("perimeter").textContent = perimeter;
+                document.getElementById("square").textContent = square;
+                document.getElementById("lengthOfDiagonal").textContent = lengthOfDiagonal;
+            }
+
+
+        </script>
+    </head>
+    <body>
+        <form name="main_form">
+            Довжина <input type="text" id="length" value="0" oninput="fun()"><br>
+            Ширина <input type="text" id="width" value="0" oninput="fun()"><br>
+            <p>Периметр: <span id="perimeter">0</span></p>
+            <p>Площина: <span id="square">0</span></p>
+            <p>Довжина діагоналі: <span id="lengthOfDiagonal">0</span></p>
+        </form>
+        <a href="lab3.html">Повернутись назад</a>
+    </body>
+</html>

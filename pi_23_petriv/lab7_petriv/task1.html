@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <script>
+            function output(){
+                first();
+                no_zeros();
+                reverser();
+                replace();
+            }
+            
+            function first(){
+                let input = document.getElementById('inFirst').value;
+                let reversed = input.split('').reverse().join('');
+                document.getElementById('outFirst').innerHTML = reversed;
+            }
+
+            function no_zeros() {
+                let input = document.getElementById('inSecond').value;
+                if (input.includes(',')) {
+                    var modifiedArray = input.split(',').filter(function (el) {
+                        return el != 0;
+                    }).join(',');
+                    document.getElementById('outSecond').innerHTML = modifiedArray;
+                } else {
+                    let withoutZeros = input.replace(/0/g, '');
+                    document.getElementById('outSecond').innerHTML = withoutZeros;
+                }
+            }
+
+            function reverser(){
+                let input = document.getElementById('inThird').value;
+                let reversed = input.split('').reverse().join('');
+                document.getElementById('outThird').innerHTML = reversed;
+            }
+
+            function replace() {
+                let string = 'Я не люблю морозиво';
+                let words = string.split(' ');
+                let temp = words[1];
+                words[1] = words[2];
+                words[2] = temp;
+
+                let result = words.join(', ');
+                document.getElementById('outFourth').innerHTML = result;
+            }
+        </script>
+    </head>
+    <body>
+        <form id="main">
+            1.1 <input type="text" id="inFirst">
+            <p id="outFirst"></p>
+            1.2 <input type="text" id="inSecond">
+            <p id="outSecond"></p>
+            1.3 <input type="text" id="inThird">
+            <p id="outThird"></p>
+            <p>1.4</p>
+            <p id="outFourth"></p>
+            <button type="button" onclick="output()">Виконати</button>
+        </form> 
+    </body>
+</html>

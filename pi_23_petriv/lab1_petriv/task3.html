@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <script>
+            function fun(a){
+                main_form.t_res.value = a;
+            }
+        </script>
+    </head>
+    <body>
+        <form id="main_form">
+            <p>onFocus</p>
+            <input type="text" size="100" value="onFocus" onfocus="fun('Текстовий елемент отримав фокус')"><br>
+            <p>onMouseOut</p>
+            <input type="text" size="100" value="onMouseOut" onmouseout="fun('Курсор не потрапив на гіперпосилання')"><br><br>
+            <input type="text" size = "100" id="t_res"><br>
+        </form>
+        <a href="lab1.html"><p>Повернутись назад</p></a>
+    </body>
+</html>

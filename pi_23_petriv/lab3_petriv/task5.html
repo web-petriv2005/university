@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <script>
+        let firstNum;
+        let secondNum;
+        let current = 1;
+        let correct = 0;
+        let total = 10;
+        let count = 0;
+
+        function create() {
+            firstNum = Math.floor(Math.random() * 10);
+            secondNum = Math.floor(Math.random() * 10);
+            document.getElementById("first").textContent = firstNum;
+            document.getElementById("second").textContent = secondNum;
+        }
+
+        function check() {
+            if (firstNum * secondNum == main_form.answes.value) {
+                correct += 1;
+                count += 1;
+                document.getElementById("ans").textContent = "Правильно!";
+                document.getElementById("percent").textContent = correct * 10;
+                document.getElementById("correctAnswers").textContent = count;
+            } else {
+                document.getElementById("ans").textContent = "Помилка, правильна відповідь «" + (firstNum*secondNum) + "».";
+            }
+        }
+
+        function next() {
+            if (current < total) {
+                current++;
+                create();
+                document.getElementById("answes").value = "";
+                document.getElementById("ans").textContent = "";
+            } else {
+                document.getElementById("result").textContent = "Кінець";
+            }
+        }
+    </script>
+</head>
+
+<body onload="create()">
+    <form name="main_form">
+        <p>Загальний рахунок <span id="percent">0</span>% (<span id="correctAnswers">0</span> правильних відповідей з
+            10)</p>
+        <span id="first"></span> x <span id="second"></span> = <input type="text" name="answes" id="answes"
+            value=""><br><br>
+        <button type="button" onclick="check()">Перевірити</button>
+        <button type="button" onclick="next()">Наступне завдання</button>
+        <p id="ans"></p>
+        <p id="result"></p>
+        <a href="lab3.html">Повернутись назад</a>
+    </form>
+</body>
+
+</html>

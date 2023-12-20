@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        #sliDown div {
+            background: #de9a44;
+            margin: 3px;
+            width: 80px;
+            height: 40px;
+            display: none;
+            float: left;
+        }
+
+        #faTogg div {
+            display: inline-block;
+            width: 75px;
+            height: 150px;
+            margin-right: 20px;
+            background-color: green;
+        }
+
+        .first {
+            background-color: #3f3;
+            left: 10px;
+        }
+
+        .second {
+            background-color: #33f;
+            left: 90px;
+        }
+
+        #forDelay div {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            float: left;
+            margin-top: 20px;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(function () {
+            $(".out").on("click", function () {
+                $("p:first").fadeOut("slow");
+            });
+            $(".in").on("click", function () {
+                $("p:first").fadeIn("slow");
+            });
+            $(".sl").on("click", function () {
+                if ($("#sliDown div").first().is(":hidden")) {
+                    $("#sliDown div").slideDown("slow");
+                } else {
+                    $("#sliDown div").hide();
+                }
+            });
+
+            $("#faTo").first().on("click", function () {
+                $(this).fadeTo("slow", 0.33);
+            });
+
+
+            $(".fadetoggle").click(function () {
+                $("#faTogg div").fadeToggle({
+                    duration: 800,
+                    easing: "linear",
+                    complete: function () {
+                        console.log("fadeToggle completed");
+                    },
+                    queue: false
+                });
+            });
+
+
+
+            $("#del").on("click", function () {
+                $("div.first").slideUp(300).delay(800).fadeIn(400);
+                $("div.second").slideUp(300).fadeIn(400);
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <p>If you click on this paragraph you'll see it just fade away.</p>
+    <button class="out">.fadeOut()</button>
+    <button class="in">.fadeIn()</button>
+    <button class="sl">.slideDown()</button><br>
+    <div id="sliDown">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <p id="faTo">
+        Click this paragraph to see it fade.
+    </p>
+    <button class="fadetoggle">Метод .toggle()</button>
+    <div id="faTogg">
+        <hr>
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+    <br>
+    <button id="del">Run</button>
+    <div id="forDelay">
+        <div class="first"></div>
+        <div class="second"></div>
+    </div>
+</body>
+
+</html>

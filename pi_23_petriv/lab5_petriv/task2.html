@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        ul {
+            list-style: none;
+            background-color: #b4b3ff;
+            width: 200px;
+            border-bottom: none;
+            padding-left: 0;
+        }
+        ul li {
+            position: relative;
+        }
+        ul li a {
+            color: #000;
+            padding: 10px 20px;
+            display: block;
+            text-decoration: none;
+        }
+
+
+        ul li ul {
+            position: absolute;
+            left: 200px;
+            top: 0;
+            display: none;
+        }
+
+        ul li.active-submenu {
+            background-color: #d1dd55;
+        }
+
+        ul li.active-submenu ul {
+            background-color: #fffe02;
+        }
+        ul li{
+            display: flex;
+    align-items: center;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>
+            <span class="arrow">▶</span>
+            <a href="#">пункт1</a>
+            <ul class="submenu">
+                <li><a href="#">пункт1.1</a></li>   
+                <li><a href="#">пункт1.2</a></li>
+            </ul>
+        </li>
+
+        <li>
+            <span class="arrow">▶</span>
+            <a href="#">пункт2</a>
+            <ul class="submenu">
+                <li><a href="#">пункт2.1</a></li>
+                <li><span class="arrow">▶</span><a href="#">пункт2.2</a>
+                    
+                    <ul class="submenu">
+                        <li><a href="#">пункт2.2.1</a></li>
+                        <li><a href="#">пункт2.2.2</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li><a href="#">пункт3</a></li>
+    </ul>
+
+    <script>
+        const menuItems = document.querySelectorAll('li');
+
+        menuItems.forEach(item => {
+            item.addEventListener('click', function (e) {
+                e.stopPropagation();
+
+                const submenu = item.querySelector('.submenu');
+                const arrow = item.querySelector('.arrow')
+
+                if (submenu.style.display === 'block') {
+                    submenu.style.display = 'none';
+                    item.classList.remove('active-submenu');
+                    arrow.textContent = '▶';
+                } else {
+                    submenu.style.display = 'block';
+                    item.classList.add('active-submenu');
+                    arrow.textContent = '▼';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function formatDate(date) {
+                let diff = new Date() - date;
+                let sec = Math.floor(diff / 1000);
+                if (sec < 60) {
+                    return sec + ' сек. назад';
+                }
+                let min = Math.floor(diff / 60000);
+                if (min < 60) {
+                    return min + ' хв. назад';
+                }
+                let d = date;
+                d = [
+                    '0' + d.getDate(),
+                    '0' + (d.getMonth() + 1),
+                    '' + d.getFullYear(),
+                    '0' + d.getHours(),
+                    '0' + d.getMinutes()
+                ].map(component => component.slice(-2));
+                return d.slice(0, 3).join('.') + ' ' + d.slice(3).join(':');
+            }
+
+            function task6() {
+                    let userInput = document.getElementById('subDays').value;
+                    let parts = userInput.split(' ');
+                    let datePart = parts[0];
+                    let timePart = parts[1];
+                    let dateComponents = datePart.split('.');
+                    let timeComponents = timePart.split(':');
+                    let inputDate = new Date(parseInt(dateComponents[2]), parseInt(dateComponents[1]) - 1, parseInt(dateComponents[0]), parseInt(timeComponents[0]), parseInt(timeComponents[1]));
+                    let formattedDate = formatDate(inputDate);
+                    document.getElementById('sixth').innerText = formattedDate;
+                }
+    </script>
+</head>
+<body>
+    <form>
+        <p>“Завдання 2.6”</p>
+        <input type="text" id="subDays">
+        <p id="sixth"></p>
+        <button type="button" onclick="task6()">Виконати</button>
+    </form>
+</body>
+</html>
